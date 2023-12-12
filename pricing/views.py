@@ -12,11 +12,11 @@ class PricesCreateAPIView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         try:
             # Проверка статуса пользователя
-            if not request.user.login_as:
+            if not request.user.login_as and not request.user.is_superuser :
                 return Response({'error': 'У вас нет статуса продавец'}, status=403)
 
             # Получение цены товара из запроса
-            original_price = request.data.get('original_price2')
+            original_price = request.data.get('original_price')
             print(original_price)
 
             # Расчет всех надбавок
@@ -29,7 +29,7 @@ class PricesCreateAPIView(generics.CreateAPIView):
             print(total_price)
 
             # Сериализация данных
-            serializer = self.get_serializer(data={'original_price2': original_price,'total_price': total_price})
+            serializer = self.get_serializer(data={'original_price': original_price,'total_price': total_price})
             serializer.is_valid(raise_exception=True)
 
             # Возвращение результата в формате JSON
