@@ -17,7 +17,6 @@ class PricesCreateAPIView(generics.CreateAPIView):
 
             # Получение цены товара из запроса
             original_price = request.data.get('original_price')
-            print(original_price)
 
             # Расчет всех надбавок
             tax = 0.06 * original_price
@@ -26,7 +25,6 @@ class PricesCreateAPIView(generics.CreateAPIView):
 
             # Итоговая цена с учетом всех надбавок
             total_price = round(original_price + tax + bank_commission + transfer_commission,2)
-            print(total_price)
 
             # Сериализация данных
             serializer = self.get_serializer(data={'original_price': original_price,'total_price': total_price})
