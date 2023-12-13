@@ -11,7 +11,7 @@ class PricesCreateAPIView(generics.CreateAPIView):
     serializer_class = PricesSerializer
     def create(self, request, *args, **kwargs):
         try:
-            # Проверка статуса пользователя
+            #Проверка статуса пользователя
             if not request.user.login_as and not request.user.is_superuser :
                 return Response({'error': 'У вас нет статуса продавец'}, status=403)
 
