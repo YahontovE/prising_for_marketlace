@@ -11,8 +11,9 @@ class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
+
 class UserListAPIView(generics.ListAPIView):
     """Эндпоинт просмотра всех юзеров"""
     serializer_class = UserSerializer
-    permission_classes =[IsSuperuser]
+    permission_classes = [IsSuperuser]
     queryset = User.objects.all()
